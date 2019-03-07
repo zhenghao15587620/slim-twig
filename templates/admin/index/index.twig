@@ -1,0 +1,51 @@
+{% extends "admin/common/layout.twig" %}
+{% block message %}
+    <meta name="description" content="{{ description | raw }}"/>
+    <meta name="keywords" content="{{ keywords | raw }}"/>
+{% endblock %}
+   {% block content %}
+       <div class="content-wrapper">
+           <table id="users_list" class="table table-bordered table-hover table-responsive">
+               <thead>
+       <tr>
+           <th>{{ "编号"|raw }}</th>
+           <th>{{ "标题"|raw }}</th>
+           <th>{{ "封面"|raw }}</th>
+           <th>{{ "状态"|raw }}</th>
+           <th>{{ "操作"|raw }}</th>
+       </tr>
+               </thead>
+       <tbody>
+       {% for agree in agreement %}
+           <tr>
+               {#时间#}
+               {#<td>{{user_list.last_login|date('H:i:s d/m/Y')}}</td>#}
+               <td>{{ agree.id }}</td>
+               <td>{{ agree.title }}</td>
+               {% if agree.thum == '' %}
+                   <td><img src="/Public/assets/images/avatar.jpg" width="50px" height="50px"></td>
+                   {% else %}
+                   <td><img src="{$vo.thum}" width="50px" height="50px"></td>
+               {% endif %}
+               {% if agree.status == 1 %}
+                   <td>上架</td>
+                   {% else %}
+                   <td>下架</td>
+              {% endif %}
+               <td>
+                   {#<li><a href="/user/{{user_list.id}}"><i class="fa fa-pencil-square-o"></i> {{'EDIT'|trans}}</a></li>#}
+                   <div class="btn-group pull-right">
+                       <a class="btn btn-primary dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">操作<span
+                                   class="caret"></span></a>
+                       <ul class="dropdown-menu">
+                           <li><a opt-edit="__CONTROLLER__/edit/id/{$vo.id}" href="javacript:void(0);">编辑</a></li>
+                           <li><a opt-delete="__CONTROLLER__/delete/id/{$vo.id}" href="javacript:void(0);">删除</a></li>
+                       </ul>
+                   </div>
+               </td>
+           </tr>
+       {% endfor %}
+       </tbody>
+           </table>
+       </div>
+   {% endblock %}
