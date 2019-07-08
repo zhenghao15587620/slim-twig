@@ -13,6 +13,7 @@ use Slim\Http\Response;
 
 class IndexController extends Controller
 {
+    //这是首页
 
     public function index(Request $request,Response $response,$args){
         $agree=$this->container->get("db");
